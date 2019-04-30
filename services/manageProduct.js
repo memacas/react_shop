@@ -3,7 +3,7 @@ function poblarProductos(){
   const path = require('path');
   const fs = require('fs');
 
-  const directoryPath = path.join(__dirname, '../frontend/src/assets/images');
+  const directoryPath = path.join(__dirname, '../frontend/assets/images');
 
   let listado_files = [];
   try{
