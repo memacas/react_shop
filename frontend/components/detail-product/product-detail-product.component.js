@@ -6,7 +6,7 @@ export default class ProductDetailProduct extends Component{
 
   render(){
 
-    const {_id, nombre, nombreFoto, precio, stock } = this.props.product;
+    const {_id, nombre, nombreFoto, descripcion, precio, stock } = this.props.product;
 
     const foto = require("../../assets/images/" + nombreFoto);
 
@@ -20,7 +20,7 @@ export default class ProductDetailProduct extends Component{
           </div>
 
           <div className="col-md-6">
-            <div><h4>{ nombre }</h4></div>
+            <div><h4>{ descripcion }</h4></div>
             <div><strong>Precio: </strong>{ precio }</div>
             <div><strong>Unidades disponibles: </strong>{ stock }</div>
           </div>

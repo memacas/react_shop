@@ -2,17 +2,15 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import Navbar from '../navbar/navbar.component';
 import { ProductConsumer } from '../../context';
+import  ProductCheckout  from './product-checkout.component';
 import './checkout.component.css';
 
 export default class Checkout extends Component {
 
-  constructor(props){
-    super(props);
-
-    console.log(this.props);
-  }
-
   render(){
+
+    const total = 0;
+
     return (
         <div className="principal">
           <div className="dataContainer">
@@ -25,10 +23,6 @@ export default class Checkout extends Component {
                 </div>
 
                 <div className="checkoutContainer">
-                <ProductConsumer>
-                  {(value) => {this.props = value;}}
-                </ProductConsumer>
-
 
                 <div className="showcaseContainer">
                   <h1 className="page-header">Carrito de compras</h1>
@@ -36,30 +30,27 @@ export default class Checkout extends Component {
                   <div className="row">
                     <div className="col-md-6">
                       <div className="row thumbnail item">
-                        <div className="row">
-                          <div className="col-md-3">
-                            <img alt="Lights" style={{maxWidth:"100%"}} />
-                          </div>
-                          <div className="col-md-9">
-                            <div>
-                            nombre
-                            </div>
-                            <div>
-                            <strong>Unidades</strong>&nbsp;qty
-                            </div>
-                          </div>
-                        </div>
-                        <div className="row">
-                          <div className="col-md-12">
-                            <strong>Subtotal:</strong>&nbsp;qty * precio
-                          </div>
-                        </div>
+
+                      <ProductConsumer>
+                        {(value) => {
+                          this.props = value;
+                          return value.cart.map(item => {
+                            return <ProductCheckout key={item.id} qty={item.qty} product = {item.detail_product} />;})
+                        }}
+                      </ProductConsumer>
+
+
+
                       </div>
                     </div>
 
                     <div className="col-md-6">
                       <div>
-                      <h4>Total: total</h4>
+                      <h4>Total:&nbsp; &nbsp;
+                      <ProductConsumer>
+                        {(value) => {return value.getTotal()}}
+                      </ProductConsumer>
+                      </h4>
                       </div>
                       <div>
                         <Link to={'/showcase'}><button type="button" name="button" className="btn btn-default">Cancelar</button></Link>
